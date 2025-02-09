@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setCredentials } from "../Slices/authSlice";
 import toast from "react-hot-toast";
 import { useAuthUserMutation } from "../Slices/userApiSlice";
@@ -101,12 +101,11 @@ const LoginScreen = () => {
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">
               Not a member?{" "}
-              <a
-                href="#"
+              <Link to={"/register"}
                 className="font-semibold text-indigo-600 hover:text-indigo-500"
               >
-                Start a 14 day free trial
-              </a>
+                Create an account
+              </Link>
             </p>
           </div>
         </div>

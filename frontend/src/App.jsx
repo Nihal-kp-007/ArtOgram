@@ -6,6 +6,9 @@ import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import UserPrivateRoutes from "./components/PrivateRoutes/UserPrivateRoutes";
 import ArtistPrivateRoutes from "./components/PrivateRoutes/ArtistPrivateRoutes";
+import ProductDetailScreen from "./screens/ProductDetailScreen";
+import WishListScreen from "./screens/WishListScreen";
+import Search from "./components/Search";
 
 const App = () => {
   return (
@@ -16,11 +19,13 @@ const App = () => {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<SignUpScreen />} />
+          <Route path="/productinfo/:id" element={<ProductDetailScreen />} />
+          <Route path="/search" element={<Search />} />
           <Route path="" element={<UserPrivateRoutes />}>
-            {/* <Route path="/cart" element={<CartScreen />} /> */}
+            <Route path="/cart" element={<CartScreen />} />
+            <Route path="/wishlist" element={<WishListScreen />} />
           </Route>
           <Route path="" element={<ArtistPrivateRoutes />}>
-            <Route path="/cart" element={<CartScreen />} />
           </Route>
         </Routes>
       </main>
