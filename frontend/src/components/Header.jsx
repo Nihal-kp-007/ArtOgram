@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
+  
   return (
     <>
       <div className="navbar bg-base-100 shadow-sm">
@@ -29,25 +32,32 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Homepage</a>
+                <Link to={"/"}>Homepage</Link>
               </li>
               <li>
-                <a>Portfolio</a>
+                <Link to={""}>Notification</Link>
               </li>
               <li>
-                <a>About</a>
+                <Link to={""}>About</Link>
               </li>
             </ul>
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-xl">ArtOgram</a>
+          <Link to={"/"} className="btn btn-ghost text-xl">
+            ArtOgram
+          </Link>
         </div>
         <div className="navbar-end">
           <div className="hidden sm:block">
-            <input type="text" placeholder="Search" className="input input-sm" />
+            <input
+              type="text"
+              placeholder="Search"
+              className="input input-sm"
+            />
           </div>
           <div className="flex-none">
+          <Link to={'/cart'}>
             <div className="dropdown dropdown-end mr-1.5">
               <div
                 tabIndex={0}
@@ -75,18 +85,10 @@ const Header = () => {
               <div
                 tabIndex={0}
                 className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
-              >
-                <div className="card-body">
-                  <span className="text-lg font-bold">8 Items</span>
-                  <span className="text-info">Subtotal: $999</span>
-                  <div className="card-actions">
-                    <button className="btn btn-primary btn-block">
-                      View cart
-                    </button>
-                  </div>
-                </div>
-              </div>
+              ></div>
             </div>
+            </Link>
+
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
