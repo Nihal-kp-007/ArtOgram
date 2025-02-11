@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useAddToCartMutation } from "../Slices/productsApiSlice";
+import { useAddToCartMutation } from "../Slices/cartApiSlice";
 import toast from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
@@ -13,6 +13,7 @@ const ProductCard = ({ product }) => {
       const userId = userInfo._id;
       console.log(productId, userId);
       await AddToCart({ id: productId, userId }).unwrap();
+      toast.success("product added to cart")
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

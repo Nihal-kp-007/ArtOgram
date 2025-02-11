@@ -18,53 +18,58 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-const addToCart = asyncHandler(async (req, res) => {
-  const { userId, id: productId } = req.body;
+// const addToCart = asyncHandler(async (req, res) => {
+//   const { userId, id: productId } = req.body;
+//   const user = await User.findOne({ _id: userId });
 
-  // Find the user and check if the product already exists in the cart
-  const user = await User.findOne({ _id: userId });
+//   if (!user) {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
 
-  if (!user) {
-    res.status(404);
-    throw new Error("User not found");
-  }
+//   const productExists = user.cart.includes(productId);
 
-  // Check if the product is already in the cart
-  const productExists = user.cart.includes(productId);
+//   if (productExists) {
+//     res.status(400).json({ message: "Product is already in the cart" });
+//   } else {
+//     const isUpdate = await User.updateOne(
+//       { _id: userId },
+//       {
+//         $addToSet: { cart: productId },
+//       }
+//     );
 
-  if (productExists) {
-    // Product already in cart, respond with a message
-    res.status(400).json({ message: "Product is already in the cart" });
-  } else {
-    // Product is not in cart, add it
-    const isUpdate = await User.updateOne(
-      { _id: userId },
-      {
-        $addToSet: { cart: productId },
-      }
-    );
+//     if (isUpdate.modifiedCount > 0) {
+//       res.json({ message: "Product added to cart" });
+//     } else {
+//       res.status(404);
+//       throw new Error("Cart not found");
+//     }
+//   }
+// });
 
-    if (isUpdate.modifiedCount > 0) {
-      res.json({ message: "Product added to cart" });
-    } else {
-      res.status(404);
-      throw new Error("Cart not found");
-    }
-  }
-});
+// const getCartItems = asyncHandler(async (req, res) => {
+//   console.log("afdsfdg");
+//   const { userId } = req.body;
+//   console.log(userId);
+//   console.log(userId);
+//   const data = await User.findOne({ _id: userId }).populate("cart");
+//   if (data) {
+//     res.json(data);
+//   } else {
+//     res.status(404);
+//     throw new Error("cart items not found");
+//   }
+// });
 
-const getCartItems = asyncHandler(async (req, res) => {
-  console.log("afdsfdg");
-  const { userId } = req.body;
-  console.log(userId);
-  console.log(userId);
-  const data = await User.findOne({ _id: userId }).populate("cart");
-  if (data) {
-    res.json(data);
-  } else {
-    res.status(404);
-    throw new Error("cart items not found");
-  }
-});
+// const deleteCartItem = asyncHandler(async (req, res) => {
+//   const { id } = req.body;
+//   const response = await Product.deleteMany({ id: { $in: id } });
+//   if (response) {
+//     res.send({ code: 200, message: "delete" });
+//   } else {
+//     res.send({ code: 200, message: "server err" });
+//   }
+// });
 
-export { getProducts, getProductById, addToCart, getCartItems };
+export { getProducts, getProductById,};
