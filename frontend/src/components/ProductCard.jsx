@@ -1,10 +1,27 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useAddToCartMutation } from "../Slices/productsApiSlice";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
+  const { userInfo } = useSelector((state) => state.auth);
+  const [AddToCart] = useAddToCartMutation();
+
+  const AddToCartHandler = async (id) => {
+    try {
+      const productId = id;
+      const userId = userInfo._id;
+      console.log(productId, userId);
+      await AddToCart({ id: productId, userId }).unwrap();
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   return (
     <>
       <div className="relative flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-        <Link to={`/productinfo/${product._id}`}
+        <Link
+          to={`/productinfo/${product._id}`}
           className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
         >
           <img
@@ -19,7 +36,7 @@ const ProductCard = ({ product }) => {
         <div className="mt-4 px-5 pb-5">
           <a href="#">
             <h5 className="text-xl tracking-tight text-slate-900 line-clamp-1">
-             {product.name}
+              {product.name}
             </h5>
           </a>
           <div className="mt-2 flex items-center justify-between">
@@ -29,6 +46,7 @@ const ProductCard = ({ product }) => {
             </p>
 
             <button
+              onClick={() => AddToCartHandler(product._id)}
               className="flex items-center justify-center rounded-md px-2 py-1 bg-slate-900 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:px-5 sm:py-2.5"
             >
               <svg

@@ -1,5 +1,6 @@
 import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../models/productModel.js";
+import User from "../models/userModel.js";
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find();
@@ -7,7 +8,7 @@ const getProducts = asyncHandler(async (req, res) => {
 });
 
 const getProductById = asyncHandler(async (req, res) => {
-  console.log(req.params.id)
+  console.log(req.params.id);
   const product = await Product.findById(req.params.id);
   if (product) {
     res.json(product);
@@ -17,4 +18,53 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById };
+const addToCart = asyncHandler(async (req, res) => {
+  const { userId, id: productId } = req.body;
+
+  // Find the user and check if the product already exists in the cart
+  const user = await User.findOne({ _id: userId });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  // Check if the product is already in the cart
+  const productExists = user.cart.includes(productId);
+
+  if (productExists) {
+    // Product already in cart, respond with a message
+    res.status(400).json({ message: "Product is already in the cart" });
+  } else {
+    // Product is not in cart, add it
+    const isUpdate = await User.updateOne(
+      { _id: userId },
+      {
+        $addToSet: { cart: productId },
+      }
+    );
+
+    if (isUpdate.modifiedCount > 0) {
+      res.json({ message: "Product added to cart" });
+    } else {
+      res.status(404);
+      throw new Error("Cart not found");
+    }
+  }
+});
+
+const getCartItems = asyncHandler(async (req, res) => {
+  console.log("afdsfdg");
+  const { userId } = req.body;
+  console.log(userId);
+  console.log(userId);
+  const data = await User.findOne({ _id: userId }).populate("cart");
+  if (data) {
+    res.json(data);
+  } else {
+    res.status(404);
+    throw new Error("cart items not found");
+  }
+});
+
+export { getProducts, getProductById, addToCart, getCartItems };

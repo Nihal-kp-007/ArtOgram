@@ -6,11 +6,18 @@ import { IoIosArrowBack } from "react-icons/io";
 const ProductDetailScreen = () => {
   const { id } = useParams();
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
+
+  const backHandler = () => {
+    window.history.back();
+  };
   return (
     <>
       <section className="body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
-          <span className="btn btn-circle bg-white text-black">
+          <span
+            className="btn btn-circle bg-white text-black"
+            onClick={backHandler}
+          >
             <IoIosArrowBack />
           </span>
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
@@ -124,9 +131,7 @@ const ProductDetailScreen = () => {
       <section className="p-5">
         <div className="flex justify-center mt-10">
           <div className="flex flex-col items-center w- max-w-xs p-4 bg-white rounded-3xl md:flex-row">
-            <div
-              className="-mt-28 md:-my-16 md:-ml-32"
-            >
+            <div className="-mt-28 md:-my-16 md:-ml-32">
               <img
                 className="md:ml-2 w-40 h-40 rounded-full"
                 src={product?.image}
@@ -174,10 +179,10 @@ const ProductDetailScreen = () => {
               </div>
             </div>
             <div className="ml-5 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600">
-                <span>Contact</span>
+              <span>Contact</span>
             </div>
             <div className="ml-3 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600">
-                <span>View</span>
+              <span>View</span>
             </div>
           </div>
         </div>
