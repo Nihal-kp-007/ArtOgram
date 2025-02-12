@@ -8,6 +8,7 @@ import UserPrivateRoutes from "./components/PrivateRoutes/UserPrivateRoutes";
 import ArtistPrivateRoutes from "./components/PrivateRoutes/ArtistPrivateRoutes";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import WishListScreen from "./screens/WishListScreen";
+import ArtistDetailScreen from "./screens/ArtistDetailScreen";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<SignUpScreen />} />
           <Route path="/productinfo/:id" element={<ProductDetailScreen />} />
+          <Route path="/artistdetails" element={<ArtistDetailScreen />} />
           <Route path="" element={<UserPrivateRoutes />}>
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/wishlist" element={<WishListScreen />} />

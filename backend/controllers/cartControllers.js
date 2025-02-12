@@ -3,19 +3,20 @@ import Cart from "../models/cartModel.js";
 import User from "../models/userModel.js";
 
 const addToCart = asyncHandler(async (req, res) => {
-  const { userId, id } = req.body;
-  const user = await User.findOne({ _id: userId });
+  const { productId } = req.body;
+  const { _id } = req.user;
+  const user = await User.findById(_id);
   if (!user) {
     res.status(404);
     throw new Error("User not found");
   }
-  const existingCartItem = await Cart.findOne({ userId, id });
+  const existingCartItem = await Cart.findOne({ userId: _id, productId });
   if (existingCartItem) {
     res.status(400).json({ message: "Product is already in the cart" });
   } else {
     const newCartItem = new Cart({
-      userId,
-      id,
+      userId: _id,
+      productId,
     });
     await newCartItem.save();
 
@@ -24,11 +25,11 @@ const addToCart = asyncHandler(async (req, res) => {
 });
 
 const removeFromCart = asyncHandler(async (req, res) => {
-  const { userId, productId } = req.body;
-
+  const { productId } = req.body;
+  const { _id } = req.user;
   const cartItem = await Cart.findOneAndDelete({
-    userId: userId,
-    productId: productId,
+    userId: _id,
+    productId,
   });
 
   if (!cartItem) {
@@ -39,11 +40,28 @@ const removeFromCart = asyncHandler(async (req, res) => {
 });
 
 const getCartItems = asyncHandler(async (req, res) => {
-  const { userId } = req.params;
+  const { _id } = req.user;
 
-  const cartItems = await Cart.find({ userId }).populate("id");
+  const cartItems = await Cart.find({ userId: _id }).populate("productId");
 
-  res.json(cartItems);
+  const subTotalPrice = cartItems.reduce((total, item) => {
+    const itemPrice = item.productId.price;
+    return total + itemPrice;
+  }, 0);
+
+  // Shipping cost logic
+  const shippingPrice = subTotalPrice == 0 ? 0 : 5;
+
+  // Calculate the total price (subtotal + shipping if needed)
+  const totalPrice =
+    subTotalPrice >= 100 ? subTotalPrice : subTotalPrice + shippingPrice;
+
+  res.json({
+    cartItems,
+    totalPrice,
+    subTotalPrice,
+    shippingPrice: subTotalPrice >= 100 ? 0 : shippingPrice,
+  });
 });
 
 export { addToCart, removeFromCart, getCartItems };

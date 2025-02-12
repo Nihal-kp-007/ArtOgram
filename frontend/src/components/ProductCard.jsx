@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
       const productId = id;
       const userId = userInfo._id;
       console.log(productId, userId);
-      await AddToCart({ id: productId, userId }).unwrap();
+      await AddToCart({ productId }).unwrap();
       toast.success("product added to cart")
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -42,8 +42,7 @@ const ProductCard = ({ product }) => {
           </a>
           <div className="mt-2 flex items-center justify-between">
             <p className="mr-2">
-              <span className="sm:text-3xl font-bold text-slate-900">$449</span>
-              <span className="text-sm text-slate-900 line-through">$699</span>
+              <span className="sm:text-2xl font-bold text-slate-900">${product?.price}</span>
             </p>
 
             <button

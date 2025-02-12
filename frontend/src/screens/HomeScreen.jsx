@@ -1,15 +1,15 @@
-import { LoaderIcon } from "react-hot-toast";
 import ProductCard from "../components/ProductCard.jsx";
 import { useGetProductsQuery } from "../Slices/productsApiSlice.js";
+import Loader from "../components/Loader.jsx";
 
 const HomeScreen = () => {
   const { data:products, isLoading, error } = useGetProductsQuery();
   return (
     <>
       {isLoading ? (
-        <LoaderIcon />
+        <Loader />
       ) : error ? (
-        <div>{error.data.message}</div>
+        <div className="flex justify-center">{error.data.message}</div>
       ) : (
         <>
           <h1>Latest Products</h1>

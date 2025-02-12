@@ -9,7 +9,8 @@ const getProducts = asyncHandler(async (req, res) => {
 
 const getProductById = asyncHandler(async (req, res) => {
   console.log(req.params.id);
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate("user");
+  console.log(product.user)
   if (product) {
     res.json(product);
   } else {
@@ -17,6 +18,10 @@ const getProductById = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+
+// const getArtist = asyncHandler(async(req, res) => {
+//   const artist = await Product.findOne()
+// })
 
 // const addToCart = asyncHandler(async (req, res) => {
 //   const { userId, id: productId } = req.body;
