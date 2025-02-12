@@ -32,35 +32,57 @@ const OrderSummary = () => {
               Edit
             </button>
           </div>
-          <div className="flex gap-10">
-            <div className="size-16">
-              <img
-                src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
-                alt="productImage"
-              />
+          <div className=" h-[190px] overflow-auto pb-5 border-b-2 mb-5">
+            <div className="flex gap-10">
+              <div className="size-16">
+                <img
+                  src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
+                  alt="productImage"
+                />
+              </div>
+              <p>Product name</p>
+              <p>$512</p>
             </div>
-            <p>Product name</p>
-            <p>$512</p>
-          </div>
-          <div className="flex gap-10">
-            <div className="size-16">
-              <img
-                src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
-                alt="productImage"
-              />
+            <div className="flex gap-10">
+              <div className="size-16">
+                <img
+                  src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
+                  alt="productImage"
+                />
+              </div>
+              <p>Product name</p>
+              <p>$512</p>
             </div>
-            <p>Product name</p>
-            <p>$512</p>
-          </div>
-          <div className="flex gap-10 border-b-2 mb-5">
-            <div className="size-16">
-              <img
-                src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
-                alt="productImage"
-              />
+            <div className="flex gap-10">
+              <div className="size-16">
+                <img
+                  src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
+                  alt="productImage"
+                />
+              </div>
+              <p>Product name</p>
+              <p>$512</p>
             </div>
-            <p>Product name</p>
-            <p>$512</p>
+            <div className="flex gap-10">
+              <div className="size-16">
+                <img
+                  src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
+                  alt="productImage"
+                />
+              </div>
+              <p>Product name</p>
+              <p>$512</p>
+            </div>
+            <div className="flex gap-10">
+              <div className="size-16">
+                <img
+                  src="https://imgs.search.brave.com/jvCre8FAk7FP_2BmlDuwweUYOEFK2rLB8AgcTMEr6Tk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmxvZ3JvY2tldC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMTIvMTAtYmVz/dC10YWlsd2luZC1j/c3MtY29tcG9uZW50/LXRlbXBsYXRlLWNv/bGxlY3Rpb25zLnBu/Zw"
+                  alt="productImage"
+                />
+              </div>
+              <p>Product name</p>
+              <p>$512</p>
+            </div>
           </div>
           <div className="flex flex-col">
             <span className="flex justify-between">
