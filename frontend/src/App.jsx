@@ -10,6 +10,8 @@ import ProductDetailScreen from "./screens/ProductDetailScreen";
 import WishListScreen from "./screens/WishListScreen";
 import ArtistDetailScreen from "./screens/ArtistDetailScreen";
 import ShippingScreen from "./screens/ShippingScreen";
+import OrderSummary from "./screens/OrderSummary";
+import PaymentScreen from "./screens/PaymentScreen";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/wishlist" element={<WishListScreen />} />
             <Route path="/shipping" element={<ShippingScreen />} />
+            <Route path="/ordersummary" element={<OrderSummary />} />
+            <Route path="/payment" element={<PaymentScreen />} />
           </Route>
           <Route path="" element={<ArtistPrivateRoutes />}>
           </Route>
