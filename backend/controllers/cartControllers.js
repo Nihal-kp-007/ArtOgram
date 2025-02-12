@@ -12,7 +12,8 @@ const addToCart = asyncHandler(async (req, res) => {
   }
   const existingCartItem = await Cart.findOne({ userId: _id, productId });
   if (existingCartItem) {
-    res.status(400).json({ message: "Product is already in the cart" });
+    res.status(400);
+    throw new Error("Product is already in the cart");
   } else {
     const newCartItem = new Cart({
       userId: _id,
@@ -48,11 +49,7 @@ const getCartItems = asyncHandler(async (req, res) => {
     const itemPrice = item.productId.price;
     return total + itemPrice;
   }, 0);
-
-  // Shipping cost logic
   const shippingPrice = subTotalPrice == 0 ? 0 : 5;
-
-  // Calculate the total price (subtotal + shipping if needed)
   const totalPrice =
     subTotalPrice >= 100 ? subTotalPrice : subTotalPrice + shippingPrice;
 
@@ -63,5 +60,7 @@ const getCartItems = asyncHandler(async (req, res) => {
     shippingPrice: subTotalPrice >= 100 ? 0 : shippingPrice,
   });
 });
+
+
 
 export { addToCart, removeFromCart, getCartItems };

@@ -14,17 +14,10 @@ const cartApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: `/api/wishLists/getProducts`,
       }),
-      providesTags:["WishList"]
+      providesTags: ["WishList"],
     }),
-    // removeFromCart: build.mutation({
-    //   query: (cartData) => ({
-    //     url: "/api/carts/remove",
-    //     method: "DELETE",
-    //     body: cartData,
-    //   }),
-    //   invalidatesTags:["Cart"]
-    // }),
   }),
 });
 
-export const { useAddToWishListMutation , useGetWishListItemsQuery} = cartApiSlice;
+export const { useAddToWishListMutation, useGetWishListItemsQuery } =
+  cartApiSlice;

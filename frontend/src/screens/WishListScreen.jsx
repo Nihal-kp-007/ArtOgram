@@ -13,14 +13,14 @@ const WishListScreen = () => {
               <div className="px-5 mt-5">
                 <div className="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
                   <img
-                    className="w-full rounded-lg object-cover object-center"
+                    className="w-60 h-60 rounded-lg object-cover object-center mx-auto"
                     src={product?.productId?.image}
-                    alt="product"
+                    alt="productImage"
                   />
-                  <p className="my-4 pl-4 font-bold text-gray-500 line-clamp-1">
+                  <p className="my-1 pl-4 font-bold text-gray-500 line-clamp-1">
                     {product?.productId?.name}
                   </p>
-                  <p className="mb-4 ml-4 text-xl font-semibold text-gray-800">
+                  <p className="mb-1 ml-4 text-xl font-semibold text-gray-800">
                     ${product?.productId?.price}
                   </p>
                   <Link to={`/productinfo/${product?.productId?._id}`}>

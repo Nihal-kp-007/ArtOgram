@@ -4,15 +4,15 @@ import {
   useGetCartItemsQuery,
   useRemoveFromCartMutation,
 } from "../Slices/cartApiSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { IoIosArrowBack } from "react-icons/io";
 
 const CartScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  const userId = userInfo._id;
   const { data: products, error, isLoading } = useGetCartItemsQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
+  const navigate = useNavigate()
 
   const removeFromCartHandler = async (productId) => {
     try {
@@ -25,6 +25,10 @@ const CartScreen = () => {
   const backHandler = () => {
     window.history.back();
   };
+
+  const checkOutHandler =()=> {
+    navigate("/shipping")
+  }
   return (
     <>
       <span
@@ -106,7 +110,11 @@ const CartScreen = () => {
                 <p className="text-sm text-gray-700">including VAT</p>
               </div>
             </div>
-            <button className="mt-6 w-full rounded-md bg-slate-900 py-1.5 font-medium text-white hover:bg-gray-700 cursor-pointer">
+            <button
+              disabled={products?.cartItems?.length === 0}
+              onClick={checkOutHandler}
+              className="mt-6 w-full rounded-md bg-slate-900 py-1.5 font-medium text-white hover:bg-gray-700 cursor-pointer"
+            >
               Check out
             </button>
           </div>

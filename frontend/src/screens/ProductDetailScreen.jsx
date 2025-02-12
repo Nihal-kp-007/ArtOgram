@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../Slices/productsApiSlice";
 import { IoIosArrowBack } from "react-icons/io";
@@ -7,26 +6,25 @@ import toast from "react-hot-toast";
 
 const ProductDetailScreen = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { data: product, isLoading, error } = useGetProductByIdQuery(id);
-  const [addToWishList] = useAddToWishListMutation()
+  const [addToWishList] = useAddToWishListMutation();
 
-  const wishListHandler = async(productId) => {
+  const wishListHandler = async (productId) => {
     try {
-      await addToWishList({ productId }).unwrap();
-      toast.success("product added to wishlist");
+      const res = await addToWishList({ productId }).unwrap();
+      toast.success(res?.message);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-  }
-
+  };
   const backHandler = () => {
     window.history.back();
-  }
+  };
 
   const detailHandler = () => {
-    navigate("/artistdetails")
-  }
+    navigate("/artistdetails");
+  };
   return (
     <>
       <section className="body-font overflow-hidden">
@@ -131,7 +129,10 @@ const ProductDetailScreen = () => {
                 <button className="flex ml-auto cursor-pointer text-white bg-slate-900 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 rounded">
                   Add to cart
                 </button>
-                <button onClick={() => wishListHandler(product?._id)} className="rounded-full w-10 h-10 cursor-pointer bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 hover:text-red-700 hover:bg-red-300">
+                <button
+                  onClick={() => wishListHandler(product?._id)}
+                  className="rounded-full w-10 h-10 cursor-pointer p-0 border-0 inline-flex items-center justify-center ml-4 hover:bg-red-300 hover:text-red-700 bg-gray-200 text-gray-500"
+                >
                   <svg
                     fill="currentColor"
                     className="w-5 h-5"
@@ -157,7 +158,9 @@ const ProductDetailScreen = () => {
             </div>
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col items-center md:items-start ml-2">
-                <h2 className="text-xl font-bold text-black">{product?.user?.name}</h2>
+                <h2 className="text-xl font-bold text-black">
+                  {product?.user?.name}
+                </h2>
                 <p className="text-base font-medium text-gray-400">ARTIST</p>
               </div>
               <div className="flex items-center justify-center space-x-3 md:justify-start">
@@ -195,10 +198,13 @@ const ProductDetailScreen = () => {
                 </a>
               </div>
             </div>
-              {/* <div className="ml-5 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600">
+            {/* <div className="ml-5 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600">
                 <span>Contact</span>
               </div> */}
-            <div className="ml-3 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600" onClick={detailHandler}>
+            <div
+              className="ml-3 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600"
+              onClick={detailHandler}
+            >
               <span>View</span>
             </div>
           </div>

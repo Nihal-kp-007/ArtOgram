@@ -9,6 +9,7 @@ import ArtistPrivateRoutes from "./components/PrivateRoutes/ArtistPrivateRoutes"
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import WishListScreen from "./screens/WishListScreen";
 import ArtistDetailScreen from "./screens/ArtistDetailScreen";
+import ShippingScreen from "./screens/ShippingScreen";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="" element={<UserPrivateRoutes />}>
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/wishlist" element={<WishListScreen />} />
+            <Route path="/shipping" element={<ShippingScreen />} />
           </Route>
           <Route path="" element={<ArtistPrivateRoutes />}>
           </Route>

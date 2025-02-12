@@ -90,7 +90,7 @@ const Header = () => {
             </div>
           </Link>
           <div className="flex-none">
-            <Link to={"/cart"}>
+            <Link to={userInfo?"/cart":"/login"}>
               <div className="dropdown dropdown-end mr-1.5">
                 <div
                   tabIndex={0}
