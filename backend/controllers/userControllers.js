@@ -112,7 +112,40 @@ const deleteUser = asyncHandler(async (req, res) => {
   res.json(user);
 });
 
-  
+const addAddress = asyncHandler(async (req, res) => {
+  const { _id: userId } = req.user;
+  const { name, phoneNumber, postalCode, state, houseNumber, roadName } =
+    req.body;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  } else {
+    user.address = {
+      name,
+      phoneNumber,
+      postalCode,
+      state,
+      houseNumber,
+      roadName,
+    };
+    const addaddress = await user.save();
+    res.status(200).json(addaddress);
+  }
+});
+
+const getAddress = asyncHandler(async (req, res) => {
+  const { _id: userId } = req.user;
+
+  const user = await User.findById(userId).select("address");
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+  res.status(200).json(user.address);
+});
 
 export {
   registerUser,
@@ -123,4 +156,6 @@ export {
   updateUser,
   getUser,
   deleteUser,
+  addAddress,
+  getAddress,
 };

@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { setCredentials } from "../Slices/authSlice";
 import toast from "react-hot-toast";
 import { useAuthUserMutation } from "../Slices/userApiSlice";
+import Loader from "../components/Loader";
 
 const LoginScreen = () => {
-//   const { userInfo } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +20,11 @@ const LoginScreen = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials(res));
-      navigate("/");
+      if (res?.role === "User") {
+        navigate("/");
+      } else if (res?.role === "Artist") {
+        navigate("/artistdetails");
+      }
     } catch (error) {
       toast.error(error?.data?.message);
     }
@@ -66,14 +70,6 @@ const LoginScreen = () => {
                   >
                     Password
                   </label>
-                  <div className="text-sm">
-                    <a
-                      href="#"
-                      className="font-semibold text-indigo-600 hover:text-indigo-500"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
                 </div>
                 <div className="mt-2">
                   <input
@@ -92,16 +88,22 @@ const LoginScreen = () => {
               <div>
                 <button
                   type="submit"
+                  disabled={isLoading} // Disable the button while loading
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sign in
+                  {isLoading ? (
+                    <Loader />
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
               </div>
             </form>
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">
               Not a member?{" "}
-              <Link to={"/register"}
+              <Link
+                to={"/register"}
                 className="font-semibold text-indigo-600 hover:text-indigo-500"
               >
                 Create an account

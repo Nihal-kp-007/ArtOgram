@@ -21,6 +21,14 @@ const userSchema = mongoose.Schema(
       required: true,
       default: "User",
     },
+    address: {
+      name: { type: String, required: true },
+      phoneNumber: { type: Number, required: true },
+      postalCode: { type: String, required: true },
+      state: { type: String, required: true },
+      houseNumber: { type: String, required: true },
+      roadName: { type: String, required: true },
+    },
   },
   {
     timestamps: true,

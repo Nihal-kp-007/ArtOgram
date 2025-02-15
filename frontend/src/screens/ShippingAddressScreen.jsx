@@ -1,10 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { useState } from "react";
+import { useAddAddressMutation } from "../Slices/userApiSlice";
 
-const ShippingScreen = () => {
+const ShippingAddressScreen = () => {
+  const [name, setName] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [state, setState] = useState("");
+  const [houseNumber, setHouseNumber] = useState("");
+  const [roadName, setRoadName] = useState("");
+  const [addAddress] = useAddAddressMutation();
+
   const navigate = useNavigate();
   const placeOrderHandler = async () => {
-    navigate("/ordersummary")
+    const res = await addAddress({
+      name,
+      phoneNumber,
+      postalCode,
+      state,
+      houseNumber,
+      roadName,
+    });
+    console.log(res);
+    navigate("/ordersummary");
   };
   return (
     <>
@@ -25,16 +44,22 @@ const ShippingScreen = () => {
                 name="name"
                 className=" rounded-md w-full border border-gray-200 px-4 py-3 pl-4 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Full Name (Required)*"
+                value={name}
+                required
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
             <div className="mb-3">
               <input
-                type="text"
+                type="number"
                 id="phone-number"
                 name="phone-number"
                 className=" rounded-md w-full border border-gray-200 px-4 py-3 pl-4 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Phone number"
+                value={phoneNumber}
+                required
+                onChange={(e) => setphoneNumber(e.target.value)}
               />
             </div>
 
@@ -44,12 +69,18 @@ const ShippingScreen = () => {
                 name="pincode"
                 className=" rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Pincode (Required)*"
+                value={postalCode}
+                required
+                onChange={(e) => setPostalCode(e.target.value)}
               />
               <input
                 type="text"
                 name="state"
                 className=" rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="state (Required)*"
+                value={state}
+                required
+                onChange={(e) => setState(e.target.value)}
               />
             </div>
 
@@ -59,6 +90,9 @@ const ShippingScreen = () => {
                 name="house"
                 className=" rounded-md w-full border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="House No. (Required)*"
+                value={houseNumber}
+                required
+                onChange={(e) => setHouseNumber(e.target.value)}
               />
             </div>
             <div className="flex mb-3">
@@ -67,6 +101,9 @@ const ShippingScreen = () => {
                 name="Road-name"
                 className=" rounded-md w-full border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Road name (Required)*"
+                value={roadName}
+                required
+                onChange={(e) => setRoadName(e.target.value)}
               />
             </div>
           </div>
@@ -82,4 +119,4 @@ const ShippingScreen = () => {
   );
 };
 
-export default ShippingScreen;
+export default ShippingAddressScreen;

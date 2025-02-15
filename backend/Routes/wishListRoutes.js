@@ -8,6 +8,5 @@ import {
 const router = express.Router();
 router.route("/getProducts").get(protect, getWishListItems);
 router.route("/add").post(protect, addTOwisList)
-// router.route("/remove").delete(protect, removeFromCart);
 
 export default router;

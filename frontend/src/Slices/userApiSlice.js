@@ -23,6 +23,18 @@ const userApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    addAddress: build.mutation({
+      query: (data) => ({
+        url: "/api/users/address",
+        method: "POST",
+        body:data,
+      }),
+    }),
+    getAddress: build.query({
+      query: () => ({
+        url: "/api/users/address",
+      }),
+    }),
   }),
 });
 
@@ -30,4 +42,6 @@ export const {
   useRegisterUserMutation,
   useAuthUserMutation,
   useLogoutUserMutation,
+  useAddAddressMutation,
+  useGetAddressQuery,
 } = userApiSlice;

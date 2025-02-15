@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { useGetAddressQuery } from "../Slices/userApiSlice";
 
 const OrderSummary = () => {
+  const { data: address } = useGetAddressQuery();
+  console.log(address);
   const navigate = useNavigate();
   const continueHandler = async () => {
     navigate("/payment");
@@ -19,14 +22,14 @@ const OrderSummary = () => {
           <p className="text-xl font-medium text-black">Delivery To:</p>
           <div className="pb-5 border-b-2 mb-5">
             <div className="text-black">
-              <p className="font-bold">Nihal</p>
+              <p className="font-bold">{address?.name}</p>
               <div className="flex">
-                <p className="font-medium">perincheerin(h),</p>
-                <p className="font-medium">Ernad Subdistrict,</p>
-                <p className="font-medium">kerala,</p>
-                <p className="font-medium">675233</p>
+                <p className="font-medium">{address?.houseNumber},</p>
+                <p className="font-medium">{address?.roadName},</p>
+                <p className="font-medium">{address?.state},</p>
+                <p className="font-medium">{address?.postalcode}</p>
               </div>
-              <p className="font-medium">7555555233</p>
+              <p className="font-medium">{address?.phoneNumber}</p>
             </div>
             <button className="text-blue-700 text-md cursor-pointer mt-2">
               Edit
