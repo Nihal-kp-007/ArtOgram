@@ -7,12 +7,14 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { IoIosArrowBack } from "react-icons/io";
+import { useGetAddressQuery } from "../Slices/userApiSlice";
 
 const CartScreen = () => {
-  const { userInfo } = useSelector((state) => state.auth);
   const { data: products, error, isLoading } = useGetCartItemsQuery();
+  const { data: address } = useGetAddressQuery();
+  console.log(address);
   const [removeFromCart] = useRemoveFromCartMutation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const removeFromCartHandler = async (productId) => {
     try {
@@ -26,9 +28,13 @@ const CartScreen = () => {
     window.history.back();
   };
 
-  const checkOutHandler =()=> {
-    navigate("/shipping")
-  }
+  const checkOutHandler = () => {
+    if (address && address.name) {
+      return navigate("/ordersummary");
+    } else {
+      return navigate("/shipping");
+    }
+  };
   return (
     <>
       <span

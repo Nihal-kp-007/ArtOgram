@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useState } from "react";
 import { useAddAddressMutation } from "../Slices/userApiSlice";
+import toast from "react-hot-toast";
 
 const ShippingAddressScreen = () => {
   const [name, setName] = useState("");
@@ -14,16 +15,31 @@ const ShippingAddressScreen = () => {
 
   const navigate = useNavigate();
   const placeOrderHandler = async () => {
-    const res = await addAddress({
-      name,
-      phoneNumber,
-      postalCode,
-      state,
-      houseNumber,
-      roadName,
-    });
-    console.log(res);
-    navigate("/ordersummary");
+    try {
+      if (
+        name &&
+        phoneNumber &&
+        postalCode &&
+        state &&
+        houseNumber &&
+        roadName
+      ) {
+        await addAddress({
+          name,
+          phoneNumber,
+          postalCode,
+          state,
+          houseNumber,
+          roadName,
+        }).unwrap();
+
+        navigate("/ordersummary");
+      } else {
+        toast.error("All fields are required");
+      }
+    } catch (err) {
+      toast.error(err?.data?.message);
+    }
   };
   return (
     <>
@@ -45,8 +61,8 @@ const ShippingAddressScreen = () => {
                 className=" rounded-md w-full border border-gray-200 px-4 py-3 pl-4 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Full Name (Required)*"
                 value={name}
-                required
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
 

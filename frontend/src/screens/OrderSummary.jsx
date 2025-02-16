@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useGetAddressQuery } from "../Slices/userApiSlice";
+import EditAddressModal from "../components/EditAddressModal";
 
 const OrderSummary = () => {
   const { data: address } = useGetAddressQuery();
-  console.log(address);
   const navigate = useNavigate();
   const continueHandler = async () => {
     navigate("/payment");
   };
+  // const editHandler = () => {
+  //   <EditAddressModal />
+  // }
   return (
     <>
       <div className="flex flex-col items-center border-b bg-white py-3 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -31,9 +34,9 @@ const OrderSummary = () => {
               </div>
               <p className="font-medium">{address?.phoneNumber}</p>
             </div>
-            <button className="text-blue-700 text-md cursor-pointer mt-2">
-              Edit
-            </button>
+            <div className="text-blue-700 text-md cursor-pointer mt-2">
+              <EditAddressModal />
+            </div>
           </div>
           <div className=" h-[190px] overflow-auto pb-5 border-b-2 mb-5">
             <div className="flex gap-10">

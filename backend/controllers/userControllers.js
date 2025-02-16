@@ -117,7 +117,6 @@ const addAddress = asyncHandler(async (req, res) => {
   const { name, phoneNumber, postalCode, state, houseNumber, roadName } =
     req.body;
   const user = await User.findById(userId);
-
   if (!user) {
     res.status(404);
     throw new Error("User not found");
@@ -137,14 +136,33 @@ const addAddress = asyncHandler(async (req, res) => {
 
 const getAddress = asyncHandler(async (req, res) => {
   const { _id: userId } = req.user;
-
   const user = await User.findById(userId).select("address");
-
   if (!user) {
     res.status(404);
     throw new Error("User not found");
   }
   res.status(200).json(user.address);
+});
+
+const updateAddress = asyncHandler(async (req, res) => {
+  const { _id: userId } = req.user;
+  const { name, phoneNumber, postalCode, state, houseNumber, roadName } = req.body;
+  const user = await User.findById(userId);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  } else {
+    if (user.address) {
+      user.address.name = name || user.address.name;
+      user.address.phoneNumber = phoneNumber || user.address.phoneNumber;
+      user.address.postalCode = postalCode || user.address.postalCode;
+      user.address.state = state || user.address.state;
+      user.address.houseNumber = houseNumber || user.address.houseNumber;
+      user.address.roadName = roadName || user.address.roadName;
+    }
+    const updatedUser = await user.save();
+    res.status(200).json(updatedUser);
+  }
 });
 
 export {
@@ -158,4 +176,5 @@ export {
   deleteUser,
   addAddress,
   getAddress,
+  updateAddress,
 };

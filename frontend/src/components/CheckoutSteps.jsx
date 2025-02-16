@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
+import { useGetAddressQuery } from "../Slices/userApiSlice";
 
 const CheckoutSteps = ({ step1, step2, step3 }) => {
+  const { data: address } = useGetAddressQuery();
+  const isAddressAvailable = address && Object.keys(address).length > 0;
   return (
     <div className="mt-4 py-2 text-xs sm:mt-0 sm:mx-auto sm:text-base">
       <div className="relative">
         <ul className="relative flex  items-center justify-between space-x-2 sm:space-x-4">
           {step1 ? (
-            <Link to={"/shipping"}>
+            <Link to={isAddressAvailable ? "/ordersummary" : "/shipping"} disabled={isAddressAvailable}>
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
                 <p className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
                   1
