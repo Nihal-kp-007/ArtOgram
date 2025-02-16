@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { useGetCartItemsQuery } from "../Slices/cartApiSlice";
 
 const PaymentScreen = () => {
+  const { data: productsPrice } = useGetCartItemsQuery();
   const [selectedPayment, setSelectedPayment] = useState("");
   const handlePaymentChange = (e) => {
     setSelectedPayment(e.target.value);
@@ -182,18 +184,18 @@ const PaymentScreen = () => {
                 <h3 className="text-lg font-bold text-gray-800">Summary</h3>
                 <ul className="text-gray-800 mt-6 space-y-3">
                   <li className="flex flex-wrap gap-4 text-sm">
-                    Sub total <span className="ml-auto font-bold">$48.00</span>
+                    Sub total <span className="ml-auto font-bold">${productsPrice?.subTotalPrice?.toFixed(2)}</span>
                   </li>
                   <li className="flex flex-wrap gap-4 text-sm">
-                    Discount (20%){" "}
-                    <span className="ml-auto font-bold">$4.00</span>
+                    Discount
+                    <span className="ml-auto font-bold">$0.00</span>
                   </li>
                   <li className="flex flex-wrap gap-4 text-sm">
-                    Tax <span className="ml-auto font-bold">$4.00</span>
+                    Tax <span className="ml-auto font-bold">$0.00</span>
                   </li>
                   <hr />
                   <li className="flex flex-wrap gap-4 text-base font-bold">
-                    Total <span className="ml-auto">$52.00</span>
+                    Total <span className="ml-auto">${productsPrice?.totalPrice?.toFixed(2)}</span>
                   </li>
                 </ul>
               </div>

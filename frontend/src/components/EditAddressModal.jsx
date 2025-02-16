@@ -53,7 +53,7 @@ const EditAddressModal = () => {
       <button className="btn" onClick={() => modalRef.current.showModal()}>
         Edit
       </button>
-      <dialog ref={modalRef} className="modal">
+      <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
