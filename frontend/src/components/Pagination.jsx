@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Pagination = ({ pages, page, keyword }) => {
   return (
-    <div>
+    <div className="my-5">
       {pages > 1 && (
         <div className="join flex justify-center">
           {[...Array(pages).keys()].map((x) => {
