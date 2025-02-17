@@ -5,6 +5,7 @@ import { useGetCartItemsQuery } from "../Slices/cartApiSlice";
 import { useLogoutUserMutation } from "../Slices/userApiSlice";
 import { logout } from "../Slices/authSlice";
 import { useGetWishListItemsQuery } from "../Slices/WishListApiSlice";
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -73,11 +74,7 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           <div className="hidden mr-1.5 sm:block">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-sm"
-            />
+            <SearchBox />
           </div>
           <Link to={"/wishlist"}>
             <div role="button" className="btn ml-1.5 btn-ghost btn-circle">
