@@ -2,10 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./config/db.js";
 import cookieParser from "cookie-parser";
-import productRoutes from "./Routes/productRoutes.js"
-import userRoutes from "./Routes/userRoutes.js"
-import cartRoutes from "./Routes/cartRoutes.js"
-import wishListRoutes from "./Routes/wishListRoutes.js"
+import productRoutes from "./Routes/productRoutes.js";
+import userRoutes from "./Routes/userRoutes.js";
+import cartRoutes from "./Routes/cartRoutes.js";
+import orderRoutes from "./Routes/orderRoutes.js";
+import wishListRoutes from "./Routes/wishListRoutes.js";
 import { errorHandler, notFound } from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/carts", cartRoutes);
 app.use("/api/wishLists", wishListRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

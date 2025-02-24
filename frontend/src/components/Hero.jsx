@@ -71,9 +71,16 @@ const Hero = () => {
                     data-aos-delay="300"
                   >
                     <Link to={"/"} className="flex justify-center">
-                      <button className=" flex bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full">
+                      <button
+                        onClick={() =>
+                          window.scrollTo({ top: 600, behavior: "smooth" })
+                        }
+                        className=" flex bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
+                      >
                         Explore More
-                        <span className="flex items-center mt-2"><FaArrowTurnDown /></span>
+                        <span className="flex items-center mt-2">
+                          <FaArrowTurnDown />
+                        </span>
                       </button>
                     </Link>
                   </div>

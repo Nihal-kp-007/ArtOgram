@@ -1,12 +1,36 @@
 import React, { useState } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useGetCartItemsQuery } from "../Slices/cartApiSlice";
+import { useCreateOrderMutation } from "../Slices/orderApiSlice";
+import toast from "react-hot-toast";
+import { useGetAddressQuery } from "../Slices/userApiSlice";
 
 const PaymentScreen = () => {
   const { data: productsPrice } = useGetCartItemsQuery();
   const [selectedPayment, setSelectedPayment] = useState("");
+  const [createOrder, { error, isLoading }] = useCreateOrderMutation();
+  const { data: cartproducts } = useGetCartItemsQuery();
+  const { data: address } = useGetAddressQuery();
   const handlePaymentChange = (e) => {
     setSelectedPayment(e.target.value);
+  };
+
+  const placeOrderHandler = async () => {
+    console.log("dsgfdfh")
+    try {
+      const res = await createOrder({
+        cartItems: cartproducts?.cartItems,
+        shippingAddress: address,
+        paymentMethod: selectedPayment,
+        paymentResult: "",
+        subTotalPrice: cartproducts?.subTotalPrice,
+        shippingPrice: cartproducts?.shippingPrice,
+        totalPrice: cartproducts?.totalPrice,
+      }).unwrap();
+      console.log(res)
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   };
   return (
     <>
@@ -163,6 +187,7 @@ const PaymentScreen = () => {
                 )}
                 {selectedPayment === "razorpay" ? (
                   <button
+                    onClick={placeOrderHandler}
                     type="button"
                     className="btn px-7 py-3.5 text-sm tracking-wide bg-gray-900 text-white rounded-md hover:bg-gray-700"
                   >
@@ -173,7 +198,9 @@ const PaymentScreen = () => {
                 )}
                 {selectedPayment === "paypal" ? (
                   <div>
-                    <h1 className="text-red-700 font-medium">!!! corrently paypal is not able to use</h1>
+                    <h1 className="text-red-700 font-medium">
+                      !!! corrently paypal is not able to use
+                    </h1>
                   </div>
                 ) : (
                   <div></div>
@@ -184,7 +211,10 @@ const PaymentScreen = () => {
                 <h3 className="text-lg font-bold text-gray-800">Summary</h3>
                 <ul className="text-gray-800 mt-6 space-y-3">
                   <li className="flex flex-wrap gap-4 text-sm">
-                    Sub total <span className="ml-auto font-bold">${productsPrice?.subTotalPrice?.toFixed(2)}</span>
+                    Sub total{" "}
+                    <span className="ml-auto font-bold">
+                      ${productsPrice?.subTotalPrice?.toFixed(2)}
+                    </span>
                   </li>
                   <li className="flex flex-wrap gap-4 text-sm">
                     Discount
@@ -195,7 +225,10 @@ const PaymentScreen = () => {
                   </li>
                   <hr />
                   <li className="flex flex-wrap gap-4 text-base font-bold">
-                    Total <span className="ml-auto">${productsPrice?.totalPrice?.toFixed(2)}</span>
+                    Total{" "}
+                    <span className="ml-auto">
+                      ${productsPrice?.totalPrice?.toFixed(2)}
+                    </span>
                   </li>
                 </ul>
               </div>
