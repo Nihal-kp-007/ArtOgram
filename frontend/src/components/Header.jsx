@@ -28,7 +28,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm fixed top-0 z-50">
+      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -87,7 +87,7 @@ const Header = () => {
             </div>
           </Link>
           <div className="flex-none">
-            <Link to={userInfo?"/cart":"/login"}>
+            <Link to={userInfo ? "/cart" : "/login"}>
               <div className="dropdown dropdown-end mr-1.5">
                 <div
                   tabIndex={0}
@@ -139,7 +139,7 @@ const Header = () => {
                     <span className="justify-between">Profile</span>
                   </li>
                   <li>
-                    <span>Settings</span>
+                    <Link to={"/orders"}>Orders</Link>
                   </li>
                   <li>
                     <span onClick={logoutHandler}>Logout</span>

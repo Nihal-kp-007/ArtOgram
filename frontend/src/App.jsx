@@ -12,6 +12,7 @@ import ArtistDetailScreen from "./screens/ArtistDetailScreen";
 import OrderSummary from "./screens/OrderSummary";
 import PaymentScreen from "./screens/PaymentScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import OrdersListScreen from "./screens/OrdersListScreen";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/shipping" element={<ShippingAddressScreen />} />
             <Route path="/ordersummary" element={<OrderSummary />} />
             <Route path="/payment" element={<PaymentScreen />} />
+            <Route path="/orders" element={<OrdersListScreen />} />
           </Route>
           <Route path="" element={<ArtistPrivateRoutes />}>
             <Route path="/artistdetails" element={<ArtistDetailScreen />} />

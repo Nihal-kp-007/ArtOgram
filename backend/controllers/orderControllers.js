@@ -1,6 +1,5 @@
 import asyncHandler from "../middlewares/asyncHandler.js";
 import Order from "../models/orderModel.js";
-import Product from "../models/productModel.js";
 
 const addOrderItems = asyncHandler(async (req, res) => {
   console.log("first");
@@ -36,4 +35,15 @@ const addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems };
+const getMyOrder = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id }).populate({
+    path: "orderItems",
+    populate: {
+      path: "product",
+      model: "Product",
+    },
+  });
+  res.json(orders);
+});
+
+export { addOrderItems, getMyOrder };
