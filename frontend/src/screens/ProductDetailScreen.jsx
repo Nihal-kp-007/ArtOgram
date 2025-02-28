@@ -3,6 +3,8 @@ import { useGetProductByIdQuery } from "../Slices/productsApiSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { useAddToWishListMutation } from "../Slices/WishListApiSlice";
 import toast from "react-hot-toast";
+import Rating from "../components/Rating";
+import ReviewModal from "../components/ReviewModal";
 
 const ProductDetailScreen = () => {
   const { id } = useParams();
@@ -25,6 +27,7 @@ const ProductDetailScreen = () => {
   const detailHandler = () => {
     navigate("/artistdetails");
   };
+
   return (
     <>
       <section className="body-font overflow-hidden">
@@ -47,46 +50,7 @@ const ProductDetailScreen = () => {
               </h1>
               <div className="flex mb-4">
                 <span className="flex items-center">
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    className="w-4 h-4 text-red-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    className="w-4 h-4 text-red-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    className="w-4 h-4 text-red-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
-                  <svg
-                    fill="currentColor"
-                    stroke="currentColor"
-                    className="w-4 h-4 text-red-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    className="w-4 h-4 text-red-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
+                  <Rating value={product?.rating} />
                   <span className="ml-3">
                     {product?.reviews.length} reviews
                   </span>
@@ -146,6 +110,22 @@ const ProductDetailScreen = () => {
           </div>
         </div>
       </section>
+
+      <section>
+        <div className="ml-10">
+          <ReviewModal />
+        </div>
+        <div>
+          {product?.review?.length > 0 ? (
+            <div></div>
+          ) : (
+            <div className="flex justify-center">
+              NO REVIEWS FOR THIS PRODUCT
+            </div>
+          )}
+        </div>
+      </section>
+
       <section className="p-5">
         <div className="flex justify-center mt-10">
           <div className="flex flex-col items-center w- max-w-xs p-4 bg-white rounded-3xl md:flex-row">
@@ -153,7 +133,7 @@ const ProductDetailScreen = () => {
               <img
                 className="md:ml-2 w-40 h-40 rounded-full"
                 src={product?.image}
-                alt="artist image"
+                alt="   artist image"
               />
             </div>
             <div className="flex flex-col space-y-4">
@@ -198,9 +178,7 @@ const ProductDetailScreen = () => {
                 </a>
               </div>
             </div>
-            {/* <div className="ml-5 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600">
-                <span>Contact</span>
-              </div> */}
+
             <div
               className="ml-3 bg-slate-900 rounded-4xl px-4 py-0.5 cursor-pointer hover:bg-gray-700 border border-indigo-600"
               onClick={detailHandler}

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAddToCartMutation } from "../Slices/cartApiSlice";
 import toast from "react-hot-toast";
+import Rating from "./Rating";
 
 const ProductCard = ({ product }) => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -40,6 +41,10 @@ const ProductCard = ({ product }) => {
               {product.name}
             </h5>
           </a>
+          <div className="flex items-center gap-1 font-bold">
+            <Rating value={product?.rating} />
+            <span className="text-black">{product?.rating}</span>
+          </div>
           <div className="mt-2 flex items-center justify-between">
             <p className="mr-2">
               <span className="sm:text-2xl font-bold text-slate-900">
