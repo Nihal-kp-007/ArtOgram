@@ -14,6 +14,7 @@ import PaymentScreen from "./screens/PaymentScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import OrdersListScreen from "./screens/OrdersListScreen";
 import "./App.css";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
           </Route>
         </Routes>
       </main>
+    <Footer />
     </>
   );
 };

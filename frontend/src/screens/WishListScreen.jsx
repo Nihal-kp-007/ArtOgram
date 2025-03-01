@@ -6,8 +6,8 @@ const WishListScreen = () => {
   const { data: product } = useGetWishListItemsQuery();
   return (
     <div className="flex">
-      {product?.wishListItems?.map((product, index) => {
-        return (
+      {product?.wishListItems?.length > 0 ? (
+        product?.wishListItems?.map((product, index) => (
           <div key={index}>
             <div className="flex mt-5 flex-wrap">
               <div className="px-5 mt-5">
@@ -32,8 +32,12 @@ const WishListScreen = () => {
               </div>
             </div>
           </div>
-        );
-      })}
+        ))
+      ) : (
+        <div className="mx-auto mt-20 font-serif text-4xl">
+          <h1>No products in the wishlist.</h1>
+        </div>
+      )}
     </div>
   );
 };

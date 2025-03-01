@@ -12,7 +12,6 @@ import { useGetAddressQuery } from "../Slices/userApiSlice";
 const CartScreen = () => {
   const { data: products, error, isLoading } = useGetCartItemsQuery();
   const { data: address } = useGetAddressQuery();
-  console.log(address);
   const [removeFromCart] = useRemoveFromCartMutation();
   const navigate = useNavigate();
 
