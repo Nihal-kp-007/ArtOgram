@@ -13,6 +13,7 @@ import OrderSummary from "./screens/OrderSummary";
 import PaymentScreen from "./screens/PaymentScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import OrdersListScreen from "./screens/OrdersListScreen";
+import "./App.css";
 
 const App = () => {
   return (

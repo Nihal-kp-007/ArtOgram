@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../Slices/productsApiSlice";
 import { IoIosArrowBack } from "react-icons/io";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { useAddToWishListMutation } from "../Slices/WishListApiSlice";
 import toast from "react-hot-toast";
 import Rating from "../components/Rating";
@@ -115,9 +116,32 @@ const ProductDetailScreen = () => {
         <div className="ml-10">
           <ReviewModal />
         </div>
-        <div>
-          {product?.review?.length > 0 ? (
-            <div></div>
+        <div className="h-[300px] overflow-auto">
+          {product?.reviews?.length > 0 ? (
+            product.reviews.map((review, index) => (
+              <div
+                key={index}
+                className="flex flex-col lg:w-[500px] mx-auto gap-3 mt-3"
+              >
+                <div className="flex flex-col gap-4 bg-gray-700 p-4 rounded-2xl">
+                  <div className="flex justify-between">
+                    <div className="flex gap-2">
+                      <div className="w-7 h-7 flex items-center justify-center rounded-full">
+                        <FaRegCircleUser size={25} />
+                      </div>
+                      <span>{review.name}</span>
+                    </div>
+                    <div className="flex p-1 gap-1 text-orange-300">
+                      <Rating value={review.rating} />
+                    </div>
+                  </div>
+                  <div>{review.comment}</div>
+                  <div className="flex justify-between">
+                    <span>{review.createdAt}</span>
+                  </div>
+                </div>
+              </div>
+            ))
           ) : (
             <div className="flex justify-center">
               NO REVIEWS FOR THIS PRODUCT
@@ -126,7 +150,7 @@ const ProductDetailScreen = () => {
         </div>
       </section>
 
-      <section className="p-5">
+      <section className="p-5 mt-20 md:mt-0">
         <div className="flex justify-center mt-10">
           <div className="flex flex-col items-center w- max-w-xs p-4 bg-white rounded-3xl md:flex-row">
             <div className="-mt-28 md:-my-16 md:-ml-32">

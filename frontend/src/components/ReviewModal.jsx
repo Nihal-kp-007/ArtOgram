@@ -3,12 +3,15 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Loader from "./Loader";
 import Message from "./Message";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useGetReviewMutation } from "../Slices/productsApiSlice";
 
 const ReviewModal = () => {
+  const { id } = useParams();
   const modalRef = useRef(null);
   const { userInfo } = useSelector((state) => state.auth);
-
+  const [createReview, { isLoading: loadingProductReview }] =
+    useGetReviewMutation(id);
   const [rating, setRating] = useState();
   const [comment, setComment] = useState();
 
@@ -18,22 +21,24 @@ const ReviewModal = () => {
       toast.error("please fill the fields");
     } else {
       try {
-        // await createReview({ rating, comment, id }).unwrap();
+        await createReview({ rating, comment, id }).unwrap();
         setRating("");
         setComment("");
         toast.success("Thank You for FeedBack");
+        modalRef.current.close();
       } catch (error) {
         toast.error(error?.data?.message);
       }
     }
   };
+
   return (
     <div>
       <button
         className="btn btn-soft"
         onClick={() => modalRef.current.showModal()}
       >
-        Review this Product
+        ADD REVIEW +
       </button>
       <dialog ref={modalRef} className="modal">
         <div className="modal-box">
@@ -43,7 +48,7 @@ const ReviewModal = () => {
                 <h2 className="text-xl font-semibold mb-4">
                   Write a Customer Review
                 </h2>
-                {/* {<Loader />} */}
+
                 {userInfo ? (
                   <form onSubmit={submitHandler} className="space-y-4">
                     <div className="my-2">
@@ -85,11 +90,11 @@ const ReviewModal = () => {
                       ></textarea>
                     </div>
                     <button
-                      //   disabled={isLoading}
+                      disabled={loadingProductReview}
                       type="submit"
                       className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
-                      Submit
+                      {loadingProductReview ? <Loader /> : "Submit"}
                     </button>
                   </form>
                 ) : (
