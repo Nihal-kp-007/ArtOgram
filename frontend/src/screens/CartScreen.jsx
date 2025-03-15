@@ -126,7 +126,7 @@ const CartScreen = () => {
         </div>
       ) : (
         <>
-          <div className="flex mt-5 gap-2 justify-center text-4xl">
+          <div className="flex mt-5 gap-2 justify-center text-4xl mb-49">
             <h1 className="">Your Cart is Empty</h1>
             <Link className="text-blue-600" to={"/"}>
               <h1>Add Products</h1>

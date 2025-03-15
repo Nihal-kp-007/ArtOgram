@@ -5,7 +5,7 @@ import { useGetWishListItemsQuery } from "../Slices/WishListApiSlice";
 const WishListScreen = () => {
   const { data: product } = useGetWishListItemsQuery();
   return (
-    <div className="flex">
+    <div className="flex mb-8">
       {product?.wishListItems?.length > 0 ? (
         product?.wishListItems?.map((product, index) => (
           <div key={index}>
@@ -34,7 +34,7 @@ const WishListScreen = () => {
           </div>
         ))
       ) : (
-        <div className="mx-auto mt-20 font-serif text-4xl">
+        <div className="mx-auto mt-20 font-serif text-4xl my-44">
           <h1>No products in the wishlist.</h1>
         </div>
       )}

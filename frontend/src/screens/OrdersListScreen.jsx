@@ -151,12 +151,17 @@ const OrdersListScreen = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center font-serif text-4xl">
+        <div className="flex justify-center font-serif text-4xl mb-16">
           <h1>No Orders !!</h1>
         </div>
       )}
     </section>
   );
 };
+
+
+
+
+
 
 export default OrdersListScreen;

@@ -15,6 +15,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import OrdersListScreen from "./screens/OrdersListScreen";
 import "./App.css";
 import Footer from "./components/Footer";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/ordersummary" element={<OrderSummary />} />
             <Route path="/payment" element={<PaymentScreen />} />
             <Route path="/orders" element={<OrdersListScreen />} />
+            <Route path="/profile" element={<ProfileScreen />} />
           </Route>
           <Route path="" element={<ArtistPrivateRoutes />}>
             <Route path="/artistdetails" element={<ArtistDetailScreen />} />

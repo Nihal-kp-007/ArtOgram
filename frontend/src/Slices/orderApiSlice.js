@@ -8,13 +8,13 @@ const orderApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags:["Orders"]
+      invalidatesTags: ["Orders"],
     }),
     getMyOrders: build.query({
       query: () => ({
         url: "/api/orders/myorders",
       }),
-      providesTags:["Orders"]
+      providesTags: ["Orders"],
     }),
   }),
 });

@@ -6,13 +6,14 @@ import { useLogoutUserMutation } from "../Slices/userApiSlice";
 import { logout } from "../Slices/authSlice";
 import { useGetWishListItemsQuery } from "../Slices/WishListApiSlice";
 import SearchBox from "./SearchBox";
+import { useGetMyOrdersQuery } from "../Slices/orderApiSlice";
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const userId = userInfo?._id;
   const { data: products, isLoading } = useGetCartItemsQuery(userId);
   const { data } = useGetWishListItemsQuery();
-
+  const { data: orders, refetch } = useGetMyOrdersQuery();
   const [logoutApiCall] = useLogoutUserMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +26,10 @@ const Header = () => {
     } catch (error) {
       console.log(error.data.message);
     }
+  };
+  const orderScreenHandler = () => {
+    navigate("/orders");
+    refetch();
   };
   return (
     <>
@@ -136,10 +141,10 @@ const Header = () => {
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                 >
                   <li>
-                    <span className="justify-between">Profile</span>
+                    <Link to={"/profile"} className="justify-between">Profile</Link>
                   </li>
                   <li>
-                    <Link to={"/orders"}>Orders</Link>
+                    <span onClick={orderScreenHandler}>Orders</span>
                   </li>
                   <li>
                     <span onClick={logoutHandler}>Logout</span>
